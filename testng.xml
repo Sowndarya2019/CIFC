@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Google Search Suite" thread-count="2" parallel="tests">
+
+<test name="Google search chrome" >
+ <parameter name="browser" value="chrome" />
+  <parameter name="appurl" value="http://www.google.com" />
+    <classes>
+     <class name="tests.Test_search_java" />
+    </classes>
+  </test>
+   
+<test name="Google search firefox" >
+ <parameter name="browser" value="firefox" />
+  <parameter name="appurl" value="http://www.google.com" />
+    <classes>
+     <class name="tests.Test_search_selenium" />
+    </classes>
+  </test>
+ 
+</suite> <!-- Suite -->

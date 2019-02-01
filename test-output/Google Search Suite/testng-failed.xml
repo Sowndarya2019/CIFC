@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" parallel="tests" name="Failed suite [Google Search Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="2" parallel="tests" name="Google search firefox(failed)">
+    <parameter name="browser" value="firefox"/>
+    <parameter name="appurl" value="http://www.google.com"/>
+    <classes>
+      <class name="tests.test_search_selenium">
+        <methods>
+          <include name="setup"/>
+          <include name="firstPageSelenium"/>
+          <include name="validatePageSelenium"/>
+          <include name="tearDown"/>
+          <include name="initializeTestBaseSetup"/>
+        </methods>
+      </class> <!-- tests.test_search_selenium -->
+    </classes>
+  </test> <!-- Google search firefox(failed) -->
+</suite> <!-- Failed suite [Google Search Suite] -->
