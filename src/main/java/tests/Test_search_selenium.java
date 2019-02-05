@@ -30,7 +30,6 @@ public class Test_search_selenium extends Driver{
 	public void firstPageSelenium()
 	{
 		google = new Goolesearch(driver);
-		
 		google.setSearchData("selenium");
 		google.clickSearch();
 		
