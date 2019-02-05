@@ -16,9 +16,13 @@ import org.testng.annotations.Parameters;
 public class Driver {
 
 		private WebDriver driver= null;
+		String current_dir = "";
+		
 		
 		private void setDriver(String browser , String appurl)
 		{ 
+			current_dir = System.getProperty("user.dir");
+			System.out.println(current_dir);
 			
 			switch (browser) {
 			case "chrome":
@@ -37,7 +41,7 @@ public class Driver {
 		
 		public WebDriver driverChrome(String appurl ) {
 			
-			System.setProperty("webdriver.chrome.driver","D:\\workspace\\google.search\\src\\main\\java\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver",current_dir + "\\src\\main\\java\\chromedriver.exe");
 			driver = new ChromeDriver();
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	        driver.get(appurl);
@@ -48,7 +52,7 @@ public class Driver {
 		
 		public WebDriver driverFirefox(String appurl) {
 			
-			System.setProperty("webdriver.gecko.driver","D:\\workspace\\google.search\\src\\main\\java\\geckodriver.exe");
+			System.setProperty("webdriver.gecko.driver",current_dir + "\\src\\main\\java\\geckodriver.exe");
 			driver = new FirefoxDriver();
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	        driver.get(appurl);
