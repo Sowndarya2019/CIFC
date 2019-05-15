@@ -37,7 +37,7 @@ public class Driver {
 		public WebDriver driverChrome(String appurl ) {
 			
 			System.setProperty("webdriver.chrome.driver",current_dir + "\\src\\main\\java\\chromedriver.exe");
-			  String downloadFilepath = "D:\\workspace\\CIFC_downloads";
+			  String downloadFilepath = current_dir + "\\CIFC_downloads";
 
 			  HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 
