@@ -1,10 +1,11 @@
 package InvokeDriver;
 
+import java.util.List;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.Keys;
 import org.testng.TestException;
 
 
@@ -12,7 +13,7 @@ import org.testng.TestException;
 
 public class CommonUtils {
 	
-	 public WebDriver driver;
+		public WebDriver driver;
 	    public WebDriverWait wait;
 	    public Actions actions;
 
@@ -20,6 +21,35 @@ public class CommonUtils {
 	    public CommonUtils(WebDriver driver) {
 	    	this.driver = driver;
 	    }
+
+	    public void moveToPage(String url)
+	    {
+	    	try {
+	    		driver.get(url);
+	    	}catch(Exception e)
+			{
+				System.out.println("Exception-Element not found");
+			}
+	    }
+	    
+	    
+	    public List<WebElement> getElements(By selector) {
+	    	try {
+	    	
+	    		List<WebElement> elelist = driver.findElements(selector);
+	    		return elelist;
+	    	}catch (StaleElementReferenceException e) {
+	    		List<WebElement> elelist = driver.findElements(selector);
+	    		return elelist;
+	    	}
+	    	catch(Exception e)
+			{
+				System.out.println("Exception-Element not found");
+				return null;
+			}
+	    	
+	    }
+	    	
 
 	    
 	    public String getPageTitle() {
@@ -44,6 +74,7 @@ public class CommonUtils {
 
 	    public WebElement getElement(By selector) {
 	        try {
+	        	
 	            return driver.findElement(selector);
 	        } catch (Exception e) {
 	            System.out.println(String.format("Element %s does not exist - proceeding", selector));
@@ -79,6 +110,11 @@ public class CommonUtils {
 	            throw new TestException(String.format("The following element is not clickable: [%s]", selector));
 	        }
 	
+	    }
+	    
 
-}
+	    public String getTitle() {
+	       return (driver.getTitle());
+
+	    }
 }

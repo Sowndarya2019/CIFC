@@ -1,10 +1,14 @@
 package InvokeDriver;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -19,30 +23,39 @@ public class Driver {
 		String current_dir = "";
 		
 		
-		private void setDriver(String browser , String appurl)
+		private void setDriver( String appurl)
 		{ 
 			current_dir = System.getProperty("user.dir");
 			System.out.println(current_dir);
+
+				driver = driverChrome(appurl);
 			
-			switch (browser) {
-			case "chrome":
-				driver = driverChrome(appurl);
-				break;
-			case "firefox":
-				driver = driverFirefox(appurl);
-				break;
-			default:
-				System.out.println("browser : " + browser
-						+ " is invalid, Launching chrome as browser of choice..");
-				driver = driverChrome(appurl);
 			} 
 			
-		}
+		
 		
 		public WebDriver driverChrome(String appurl ) {
 			
 			System.setProperty("webdriver.chrome.driver",current_dir + "\\src\\main\\java\\chromedriver.exe");
-			driver = new ChromeDriver();
+			  String downloadFilepath = "D:\\workspace\\CIFC_downloads";
+
+			  HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+
+			  chromePrefs.put("profile.default_content_settings.popups", 0);
+
+			  chromePrefs.put("download.default_directory", downloadFilepath);
+
+			  ChromeOptions options = new ChromeOptions();
+
+			  HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
+
+			  options.setExperimentalOption("prefs", chromePrefs);
+
+			  options.addArguments("--test-type");
+			  options.addArguments("--start-maximized");
+
+			  
+			driver = new ChromeDriver(options);
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	        driver.get(appurl);
 	        driver.manage().window().maximize();
@@ -69,12 +82,12 @@ public class Driver {
 		
 		@Parameters({ "browser", "appurl" })
 		@BeforeClass
-		public void initializeTestBaseSetup(@Optional("firefox")String browser , @Optional("http://www.google.com")String appurl) {
+		public void initializeTestBaseSetup(@Optional("chrome")String browser , @Optional("localHost")String appurl) {
 			
 			//Log.startLog("Test is starting!");
 			try {
 				
-				setDriver(browser,appurl);
+				setDriver(appurl);
 
 			} catch (Exception e) {
 				System.out.println("Error....." + e.getStackTrace());
@@ -82,9 +95,11 @@ public class Driver {
 		}
 		
 		@AfterClass
-		public void tearDown()  {
+		public void tearDown() throws InterruptedException  {
 			//Log.endLog("Test is ending!");
+			Thread.sleep(50);
 			driver.quit();
+			
 		}
 
 	
