@@ -14,6 +14,7 @@ import org.openqa.selenium.remote.Command;
 
 
 import InvokeDriver.CommonUtils;
+import InvokeDriver.Log;
 
 public class CIFCDownload {
 	
@@ -39,7 +40,7 @@ public class CIFCDownload {
 	}
 	
 	public void loginToApplication(String userName, String password){
-		
+		Log.info("login with valid credentials");
 		com.enterText(locInputEmail, userName);
 		com.enterText(locInputPassword, password);
 		com.click(locLoginButton);
