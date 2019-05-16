@@ -26,7 +26,7 @@ public class Test_Download extends Driver{
 
     public Object[][] clickData() {
              return new Object[][] {
-            	 { "Repricing pipeline", "https://www.lcdcomps.com/lcd/download/10013/Repricing%20Pipeline%20-%20WEB.xlsx?rid=910&method=downloadResearchFile" }, 
+            	 //{ "Repricing pipeline", "https://www.lcdcomps.com/lcd/download/10013/Repricing%20Pipeline%20-%20WEB.xlsx?rid=910&method=downloadResearchFile" }, 
             	 { "Default List", "https://www.lcdcomps.com/lcd/download/3491/Defaults%20List%20-%20WEB.xlsx?rid=910&method=downloadResearchFile" },
             	 { "Bond for Loan Take-Out", "https://www.lcdcomps.com/lcd/download/4417/Bond%20for%20Loan%20-%20WEB.xlsx?rid=910&method=downloadResearchFile"},
             	 {"Amendment Pipeline", "https://www.lcdcomps.com/lcd/download/10015/Amendment%20Pipeline%20-%20WEB%20CD.xlsx?rid=910&method=downloadResearchFile"},
@@ -47,15 +47,21 @@ public class Test_Download extends Driver{
 	
 
 	
-	  @Test(dataProvider= "clicktabs") 
-	  public void testSearchOnGoogle(String download, String url ) throws InterruptedException {
-		  Log.info("Downloading : "+ download + " files");
+	  @Test
+	  public void test_download() throws InterruptedException {
+		  Log.info("Downloading : Repricing pipeline files");
 		  
-		  cifcObject.get_URL(url);
+		  cifcObject.get_URL("https://www.lcdcomps.com/lcd/download/10013/Repricing%20Pipeline%20-%20WEB.xlsx?rid=910&method=downloadResearchFile");
 		  cifcObject.loginToApplication("hlau@cifc.com", "Welcome1234");
 		
 	  }
-	
+	  
+	  @Test(dataProvider= "clicktabs") 
+	  public void test_downloads(String download, String url ) throws InterruptedException {
+		  Log.info("Downloading :"+ download +" files");
+		  Thread.sleep(50);
+		  cifcObject.get_URL(url);
+	  }
 	
 
 }

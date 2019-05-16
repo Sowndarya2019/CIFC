@@ -3,4 +3,5 @@
 *.classpath
 test-output/*
 target/*
+/CIFC_downloads/*
 /target/

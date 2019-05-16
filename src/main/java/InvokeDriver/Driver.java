@@ -96,8 +96,8 @@ public class Driver {
 		
 		@AfterClass
 		public void tearDown() throws InterruptedException  {
-			//Log.endLog("Test is ending!");
-			Thread.sleep(50);
+			Log.endLog("Test is ending!");
+			Thread.sleep(8000);
 			driver.quit();
 			
 		}
